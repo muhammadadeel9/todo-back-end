@@ -5,7 +5,7 @@ import mongoose, { mongo } from "mongoose";
 //   email: { type: String },
 //   // password: String
 // });
-export const CreateUserSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
   name: { type: String, require: true },
   email: { type: String, require: true },
   password: { type: String, require: true },
