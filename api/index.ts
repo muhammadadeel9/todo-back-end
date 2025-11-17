@@ -1,5 +1,6 @@
+import ServerlessHttp from 'serverless-http';
 import {app} from '../src/app';
 
 
 
-export default app
+export default  ServerlessHttp(app)
