@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(router);
 
-exports.handler = ServerlessHttp(app);
+export default ServerlessHttp(app)
 // app.listen(PORT, () => {
 //   console.log(`Server is running on http://localhost:${PORT}`);
 // });
