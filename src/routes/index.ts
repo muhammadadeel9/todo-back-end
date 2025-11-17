@@ -4,6 +4,6 @@ import userRoutes from "../modules/users/users.route";
 
 const router = Router();
 
-router.use("/api", userRoutes);
+router.use("/", userRoutes);
 
 export default router;
