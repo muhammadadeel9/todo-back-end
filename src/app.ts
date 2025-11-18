@@ -2,10 +2,10 @@ import express, { Request, Response } from "express";
 import DbConnection from "./config/dbconfig";
 import router from "./routes/index";
 
-export const app = express();
+export  const app = express();
 // const PORT = process.env.PORT || 3200;
 // Middleware
-DbConnection();
+// DbConnection();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
