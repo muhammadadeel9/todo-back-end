@@ -9,6 +9,7 @@ import { createUser, getUsers, signinUser } from "./users.service";
     export const signup = async (req: Request, res: Response) => {
     try {
         const result = await createUser(req.body);
+        console.log(result);
         return res.status(result.statusCode).json(result);
     } catch (error) {
         return res.status(500).json({ success: false, message: "Server Error" });

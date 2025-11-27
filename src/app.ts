@@ -3,14 +3,21 @@ import DbConnection from "./config/dbconfig";
 import router from "./routes/index";
 import { swaggerSpec } from "./config/swagger";
 import swaggerUi from "swagger-ui-express";
+import cookieParser from "cookie-parser";
+import cors from 'cors';
 export  const app = express();
 const PORT = process.env.PORT || 3200;
-// Middleware
+
+
 DbConnection().catch((err) => {
     console.error("Database connection failed:", err);
   });
 app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
+
 app.get("/", (req: Request, res: Response) => {
   res.json({
     message: "Welcome to Todo API",

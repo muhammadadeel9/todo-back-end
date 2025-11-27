@@ -1,10 +1,10 @@
 import { usersmodel } from "./users.model";
-
+import jwt from "jsonwebtoken";
 export const getUsers = () => usersmodel.find();
 
 export const createUser = async (data: any) => {
   const { name, email, password } = data;
-
+  console.log(name, email, password);
   if (!name || !email || !password) {
     return {
       success: false,
@@ -17,10 +17,9 @@ export const createUser = async (data: any) => {
   if (existing) {
     return { success: false, message: "Email already exists", statusCode: 409 };
   }
-
-  await usersmodel.create(data);
-
-  return { success: true, message: "User created", statusCode: 201 };
+    await usersmodel.create(data);
+  const token =  jwt.sign(data, "adeel", { expiresIn: "5d" })
+    return { success: true, message: "User created", statusCode: 201, token  };
 };
 
 export const signinUser = async (data: any) => {
