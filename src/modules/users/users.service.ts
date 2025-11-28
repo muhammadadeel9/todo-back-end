@@ -18,8 +18,7 @@ export const createUser = async (data: any) => {
     return { success: false, message: "Email already exists", statusCode: 409 };
   }
     await usersmodel.create(data);
-  const token =  jwt.sign(data, "adeel", { expiresIn: "5d" })
-    return { success: true, message: "User created", statusCode: 201, token  };
+    return { success: true, message: "User created", statusCode: 201  };
 };
 
 export const signinUser = async (data: any) => {
@@ -32,10 +31,12 @@ export const signinUser = async (data: any) => {
     if (!passwordmatch) {
       return { success: false, message: "Wrong password", statusCode: 401 };
     } else {
+  const token =  jwt.sign(data, "adeel", { expiresIn: "5d" })
       return {
         success: true,
         message: "Sing in Successfully",
         statusCode: 200,
+        token
       };
     }
   }
