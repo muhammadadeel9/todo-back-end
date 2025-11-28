@@ -14,7 +14,7 @@ DbConnection().catch((err) => {
   });
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://your-frontend-domain.vercel.app"],
+  origin: ["http://localhost:5173", "https://todo-back-end-five.vercel.app"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
