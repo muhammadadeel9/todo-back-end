@@ -20,7 +20,11 @@ export const createUser = async (data: any) => {
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   await usersmodel.create({ name, email, password: hashedPassword });
-  return { success: true, message: "User created", statusCode: 201 };
+  const token = jwt.sign({
+    email,
+    name,
+  },"adeel");
+  return { success: true, message: "User created", statusCode: 201 ,token};
 };
 
 export const signinUser = async (data: any) => {

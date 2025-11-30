@@ -3,7 +3,6 @@ import { createTask, deleteTask, readTasks, singleTask, updateTask } from "./tas
 
 const taskRoutes = Router();
 
-// Routes will be /api/v1/tasks/create (if main route uses /api/v1)
 taskRoutes.post('/create', createTask);
 taskRoutes.get('/', readTasks);
 taskRoutes.get('/task/:id',singleTask)
