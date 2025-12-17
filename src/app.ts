@@ -8,13 +8,12 @@ export  const app = express();
 const PORT = process.env.PORT || 3200;
 
 
-DbConnection().catch((err) => {
+ DbConnection().catch((err) => {
     console.error("Database connection failed:", err);
   });
 app.use(express.json());
 app.use(cors({
-  origin: [process.env.FRONT_END_URI as string],
-  // origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
+  origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
