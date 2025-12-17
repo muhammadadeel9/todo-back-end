@@ -8,9 +8,11 @@ export  const app = express();
 const PORT = process.env.PORT || 3200;
 
 
- DbConnection().catch((err) => {
-    console.error("Database connection failed:", err);
-  });
+async function bootstrap() {
+    await DbConnection();
+}
+
+bootstrap();
 app.use(express.json());
 app.use(cors({
   origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
