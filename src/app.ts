@@ -13,7 +13,8 @@ DbConnection().catch((err) => {
   });
 app.use(express.json());
 app.use(cors({
-  origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
+  origin: [process.env.FRONT_END_URI as string],
+  // origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
