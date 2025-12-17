@@ -3,7 +3,6 @@ import DbConnection from "./config/dbconfig";
 import router from "./routes/index";
 import { swaggerSpec } from "./config/swagger";
 import swaggerUi from "swagger-ui-express";
-import cookieParser from "cookie-parser";
 import cors from 'cors';
 export  const app = express();
 const PORT = process.env.PORT || 3200;
@@ -14,22 +13,11 @@ DbConnection().catch((err) => {
   });
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173", "https://todo-back-end-five.vercel.app"],
+  origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-
-
-app.get("/", (req: Request, res: Response) => {
-  res.json({
-    message: "Welcome to Todo API",
-    docs: "/api-docs",
-    version: "1.0.0",
-  });
-});
 app.use(
   "/api-docs",
   swaggerUi.serve,

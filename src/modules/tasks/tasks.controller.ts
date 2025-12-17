@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { addTask, findsingleTask, getTasks, taskDelete, taskUpdate } from "./task.service";
-import { taskmodel } from "./task.model";
 
 export const readTasks = async (req: Request, res: Response) => {
   try {
