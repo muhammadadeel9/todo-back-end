@@ -15,7 +15,8 @@ async function bootstrap() {
 bootstrap();
 app.use(express.json());
 app.use(cors({
-  origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
+  origin: "*",
+  // origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
@@ -34,7 +35,6 @@ app.get("/api-docs.json", (req: Request, res: Response) => {
   res.send(swaggerSpec);
 });
 app.use("/api" ,router);
-
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
