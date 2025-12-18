@@ -19,7 +19,6 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
 ].filter(Boolean); 
-
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (mobile apps, Postman, etc.)
@@ -36,6 +35,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   exposedHeaders: ['set-cookie']
 }));
+
+app.options("*", cors());
 
 app.use(express.json());
 
