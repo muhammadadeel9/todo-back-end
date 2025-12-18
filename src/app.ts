@@ -36,8 +36,6 @@ app.use(cors({
   exposedHeaders: ['set-cookie']
 }));
 
-app.options("*", cors());
-
 app.use(express.json());
 
 app.use(
