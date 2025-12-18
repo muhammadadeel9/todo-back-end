@@ -17,7 +17,7 @@ bootstrap();
 
 app.use(cors());
 app.use(cors({
-  origin: process.env.FRONT_END_URI as string || "",
+  origin: [process.env.FRONT_END_URI as string || "", process.env.LOCAL_URL as string || ""],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
