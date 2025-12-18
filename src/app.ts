@@ -13,9 +13,6 @@ async function bootstrap() {
 }
 
 bootstrap();
-// Source - https://stackoverflow.com/a
-// Posted by Sohail Ahmad, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-12-18, License - CC BY-SA 4.0
 
 app.use(function (req, res, next) {
   //Enabling CORS
@@ -25,6 +22,13 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+app.use(cors());
+app.use(cors({
+  origin: [process.env.FRONT_END_URI as string || "", process.env.LOCAL_URL as string || ""],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(
   "/api-docs",
