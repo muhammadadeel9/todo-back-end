@@ -14,13 +14,25 @@ async function bootstrap() {
 
 bootstrap();
 app.use(express.json());
-app.use(cors({
-  origin: "*",
-  // origin: [process.env.LOCAL_URL as string || "", process.env.FRONT_END_URI as string || ""],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+const allowedOrigins = [
+  process.env.LOCAL_URL as string || "",
+  process.env.FRONT_END_URI as string || "",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(
   "/api-docs",
   swaggerUi.serve,
