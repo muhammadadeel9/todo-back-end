@@ -13,7 +13,6 @@ async function bootstrap() {
 }
 
 bootstrap();
-app.use(express.json());
 const allowedOrigins = [
   process.env.LOCAL_URL as string || "",
   process.env.FRONT_END_URI as string || "",
@@ -34,6 +33,7 @@ app.use(
   })
 );
 app.options("*", cors());
+app.use(express.json());
 app.use(
   "/api-docs",
   swaggerUi.serve,
