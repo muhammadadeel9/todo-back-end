@@ -33,6 +33,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.options("*", cors());
 app.use(
   "/api-docs",
   swaggerUi.serve,
