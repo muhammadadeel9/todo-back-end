@@ -13,26 +13,14 @@ async function bootstrap() {
 }
 
 bootstrap();
-const allowedOrigins = [
-  process.env.LOCAL_URL as string || "",
-  process.env.FRONT_END_URI as string || "",
-];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-app.options("*", cors());
+
+app.use(cors());
+app.use(cors({
+  origin: process.env.FRONT_END_URI as string || "",
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(
   "/api-docs",
