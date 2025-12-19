@@ -1,5 +1,4 @@
 import swaggerJsDoc from "swagger-jsdoc";
-
 const swaggerOptions: swaggerJsDoc.Options = {
   definition: {
     openapi: "3.0.0",
@@ -19,7 +18,7 @@ const swaggerOptions: swaggerJsDoc.Options = {
         description: "Development server",
       },
       {
-        url: "https://todo-back-end-five.vercel.app",
+        url: "https://todo-back-end-five.vercel.app/api",
         description: "Production server",
       },
     ],

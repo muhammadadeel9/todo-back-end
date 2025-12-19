@@ -13,28 +13,52 @@ async function bootstrap() {
 }
 bootstrap();
 
-const allowedOrigins = [
-  process.env.FRONT_END_URI,
-  process.env.LOCAL_HOST_URI,
-  'http://localhost:5173',
-  'http://localhost:3000',
-].filter(Boolean); 
-app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, Postman, etc.)
-    if (!origin) return callback(null, true);
+// const allowedOrigins = [
+//   process.env.FRONT_END_URI,
+//   process.env.LOCAL_HOST_URI,
+//   'http://localhost:5173',
+//   'http://localhost:3000',
+// ].filter(Boolean); 
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Allow requests with no origin (mobile apps, Postman, etc.)
+//     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['set-cookie']
-}));
+//     if (allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       return callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true, 
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+//   exposedHeaders: ['set-cookie']
+// }));
+const allowedOrigins = [
+  "https://todo-front-end-dos8.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000",
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // ✅ DO NOT THROW ERROR
+      return callback(null, false);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
+
 
 app.use(express.json());
 
